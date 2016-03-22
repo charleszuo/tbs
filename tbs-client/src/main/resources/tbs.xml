@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xoa-app>
+  <services>
+      <service id="test.xoa.renren.com" class="com.zcwyx.tbs.test.TestServiceImpl" port="9090">
+	  <!--当请求到来时，如果线程池中的线程数小于core-size，则新建一个线程；否则，当请求的队列满的时候才再新建线程；如果请求队列满了，且线程数也到了max-size，则请求被拒绝-->
+          <worker-thread-pool core-size="20" max-size="60" />
+	  <!--请求队列设置，limit用来限制被缓存的请求的个数，当队列的填充率高于warn-ratio时，开始通过日志记录队列大小的变化-->
+	  <request-queue limit="6000" warn-ratio="0.8"/>
+	  <!--当一次请求耗时超过threshold时，记录该请求的详细信息-->
+          <service-slow threshold="100" />
+      </service>
+  </services>
+</xoa-app>
